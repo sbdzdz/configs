@@ -22,4 +22,5 @@ alias matlab="sudo /usr/local/MATLAB/R2012b/bin/matlab"
 alias tovagrant="cd /home/sebastian/sparkvagrant/"
 alias tothesis="cd /home/sebastian/Dokumenty/IS/Thesis/Text"
 alias concraft="sudo ~/.cabal/bin/concraft-pl tag ~/.cabal/bin/model.gz"
+alias tothesis="cd /home/sebastian/Dokumenty/IS/Thesis/Text"
 

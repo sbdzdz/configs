@@ -2,11 +2,23 @@ colorscheme Monokai-Refined
 filetype plugin indent on
 syntax on
 set encoding=utf-8
+set incsearch
+set hidden
+se nosol
 let mapleader = "\<Space>"
+let g:tex_flavor='latex'
 inoremap jk <ESC>
+map <leader>j :bn<cr>
+map <leader>k :bp<cr>
+noremap gg G
+noremap G gg
+map <C-l> $
+map <C-h> 0
+map <C-j> L
+map <C-k> H
 set t_Co=256
 set t_ut=
-
+set grepprg=grep\ -nH\ $*
 function! ScreenMovement(movement)
    if &wrap
       return "g" . a:movement
