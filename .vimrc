@@ -19,6 +19,7 @@ map <C-k> H
 set t_Co=256
 set t_ut=
 set grepprg=grep\ -nH\ $*
+set noswapfile
 function! ScreenMovement(movement)
    if &wrap
       return "g" . a:movement
