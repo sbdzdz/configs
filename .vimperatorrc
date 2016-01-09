@@ -1,6 +1,5 @@
 "autocomplete
 set complete=lt
-set wildoption=auto
 
 "sshhhh
 set noerrorbells
@@ -9,7 +8,7 @@ set noerrorbells
 set messagetimeout=2000
 
 "better hint chars
-set hintchars=fdasjkl;unim
+set hintchars=fdaskl;unim
 
 "move faster
 nnoremap j 3j
@@ -20,19 +19,22 @@ nnoremap <C-j> G
 nnoremap <C-k> gg
 
 "cycle between tabs more naturally
-nnoremap <C-l> gt
 nnoremap <C-h> gT
+inoremap <C-h> <Esc>gT
+nnoremap <C-l> gt
+inoremap <C-l> <Esc>gt
 
 "move back and forth more naturally
 nnoremap L <C-i>
 nnoremap H <C-o>
+
+"remap escape
+inoremap jj <Esc>
+cnoremap jj <Esc>
+nnoremap jj <Esc>
 
 hi Hint                 font-family: monospace; font-size: 14px; font-weight: normal; color: #dddddd; background-color: #1c1c1c; border: none; margin: -0.7em 0 0 -0.7em; padding: 0px 5px;
 hi Hint::after          content: attr(number);
 hi HintElem             background-color: rgba(208, 208, 240, 0.8); color: #1c1c1c;
 hi HintActive           background-color: rgba( 85, 102, 187, 0.8); color: #dddded;
 hi HintImage            opacity: .5;
-
-
-"remap escape
-map ii <Esc>
