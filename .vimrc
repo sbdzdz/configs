@@ -1,25 +1,43 @@
+"colorscheme
 colorscheme Monokai-Refined
 filetype plugin indent on
 syntax on
+
+"encoding
 set encoding=utf-8
 set incsearch
 set hidden
-se nosol
+
+"set nosol
+set noswapfile
+
+"change leader key
 let mapleader = "\<Space>"
-let g:tex_flavor='latex'
+
+"remap escape
 inoremap jk <ESC>
+
+"easier movement between files
 map <leader>j :bn<cr>
 map <leader>k :bp<cr>
+
+"switch gg and G to be more intuitive
 noremap gg G
 noremap G gg
+
+"use more intuitive move commands
 map <C-l> $
 map <C-h> 0
 map <C-j> L
 map <C-k> H
+
+"color issues
 set t_Co=256
-set t_ut=
-set grepprg=grep\ -nH\ $*
-set noswapfile
+if &term =~ '256color'
+	set t_ut=
+endif
+
+"move by screen lines
 function! ScreenMovement(movement)
    if &wrap
       return "g" . a:movement
@@ -27,13 +45,4 @@ function! ScreenMovement(movement)
       return a:movement
    endif
 endfunction
-onoremap <silent> <expr> j ScreenMovement("j")
-onoremap <silent> <expr> k ScreenMovement("k")
-onoremap <silent> <expr> 0 ScreenMovement("0")
-onoremap <silent> <expr> ^ ScreenMovement("^")
-onoremap <silent> <expr> $ ScreenMovement("$")
-nnoremap <silent> <expr> j ScreenMovement("j")
-nnoremap <silent> <expr> k ScreenMovement("k")
-nnoremap <silent> <expr> 0 ScreenMovement("0")
-nnoremap <silent> <expr> ^ ScreenMovement("^")
-nnoremap <silent> <expr> $ ScreenMovement("$")
+let g:tex_flavor='latex'
