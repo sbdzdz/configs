@@ -1,6 +1,11 @@
+"pathogen
+filetype off
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
+filetype plugin indent on
+
 "colorscheme
 colorscheme Monokai-Refined
-filetype plugin indent on
 syntax on
 
 "encoding
@@ -8,7 +13,7 @@ set encoding=utf-8
 set incsearch
 set hidden
 
-"set nosol
+se nosol
 set noswapfile
 
 "change leader key
@@ -25,11 +30,15 @@ map <leader>k :bp<cr>
 noremap gg G
 noremap G gg
 
-"use more intuitive move commands
-map <C-l> $
-map <C-h> 0
-map <C-j> L
-map <C-k> H
+"use more intuitive move commands and move by screen lines
+noremap <C-l> g$
+noremap <C-h> g0
+noremap <C-j> L
+noremap <C-k> H
+noremap <buffer><silent> j gj
+noremap <buffer><silent> k gk
+onoremap <silent> j gj
+onoremap <silent> k gk
 
 "color issues
 set t_Co=256
@@ -37,12 +46,5 @@ if &term =~ '256color'
 	set t_ut=
 endif
 
-"move by screen lines
-function! ScreenMovement(movement)
-   if &wrap
-      return "g" . a:movement
-   else
-      return a:movement
-   endif
-endfunction
+"latex mode
 let g:tex_flavor='latex'
