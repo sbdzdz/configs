@@ -1,8 +1,20 @@
 "pathogen
 filetype off
-call pathogen#runtime_append_all_bundles()
+call pathogen#infect()
 call pathogen#helptags()
 filetype plugin indent on
+
+"easymotion
+map <Leader> <Plug>(easymotion-prefix)
+let g:EasyMotion_smartcase = 1
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+nmap s <Plug>(easymotion-s2)
+hi link EasyMotionTarget ErrorMsg
+hi link EasyMotionShade  Comment
+hi link EasyMotionTarget2First MatchParen
+hi link EasyMotionTarget2Second MatchParen
+hi link EasyMotionMoveHL Search
 
 "colorscheme
 colorscheme Monokai-Refined

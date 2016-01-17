@@ -4,6 +4,9 @@ set complete=lt
 "sshhhh
 set noerrorbells
 
+"avoid instant focus
+set focuscontent
+
 "show messages for 2 seconds
 set messagetimeout=2000
 
@@ -27,11 +30,6 @@ inoremap <C-l> <Esc>gt
 "move back and forth more naturally
 nnoremap L <C-i>
 nnoremap H <C-o>
-
-"remap escape
-inoremap jj <Esc>
-cnoremap jj <Esc>
-nnoremap jj <Esc>
 
 hi Hint                 font-family: monospace; font-size: 14px; font-weight: normal; color: #dddddd; background-color: #1c1c1c; border: none; margin: -0.7em 0 0 -0.7em; padding: 0px 5px;
 hi Hint::after          content: attr(number);
