@@ -26,10 +26,6 @@ inoremap jk <ESC>
 map <leader>j :bn<cr>
 map <leader>k :bp<cr>
 
-"switch gg and G to be more intuitive
-noremap gg G
-noremap G gg
-
 "use more intuitive move commands and move by screen lines
 noremap <C-l> g$
 noremap <C-h> g0
