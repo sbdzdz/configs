@@ -51,3 +51,6 @@ let g:EasyMotion_smartcase = 1
 let g:EasyMotion_do_mapping = 0
 hi link EasyMotionTarget ErrorMsg
 hi link EasyMotionShade  Comment
+
+"treat underscores as word breaking characters
+set iskeyword-=_
