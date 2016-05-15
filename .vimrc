@@ -1,7 +1,7 @@
 "pathogen
-filetype off
-call pathogen#infect()
-call pathogen#helptags()
+"filetype off
+execute pathogen#infect()
+execute pathogen#helptags()
 filetype plugin indent on
 
 "colorscheme
@@ -42,11 +42,15 @@ if &term =~ '256color'
 	set t_ut=
 endif
 
+"XML folding
+let g:xml_syntax_folding=1
+au FileType xml setlocal foldmethod=syntax
+
 "latex mode
 let g:tex_flavor='latex'
 
 "easymotion
-nmap s <Plug>(easymotion-s2)
+nmap <leader>s <Plug>(easymotion-s2)
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_do_mapping = 0
 hi link EasyMotionTarget ErrorMsg
