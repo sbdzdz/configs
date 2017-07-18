@@ -2,11 +2,14 @@ execute pathogen#infect()
 execute pathogen#helptags()
 filetype plugin indent on
 
-" Solarized stuff
+"color scheme
 let g:solarized_termtrans = 1
 set background=dark
 colorscheme solarized
 syntax on
+
+"line numbers
+set number
 
 "encoding
 set encoding=utf-8
@@ -47,10 +50,6 @@ au FileType xml setlocal foldmethod=syntax
 
 "latex mode
 let g:tex_flavor='latex'
-
-"enter/shift+enter to insert a blank line below/above
-nmap <S-Enter> O<Esc>
-nmap <CR> o<Esc>
 
 "treat underscores as word breaking characters
 set iskeyword-=_
