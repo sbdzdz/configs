@@ -43,13 +43,6 @@ set expandtab
 set shiftwidth=4
 set softtabstop=2
 
-"insert matching parentheses
-:inoremap ( ()<Esc>i
-:inoremap [ []<Esc>i
-:inoremap { {}<Esc>i
-:inoremap ' ''<Esc>i
-:inoremap " ""<Esc>i
-
 "escape parentheses with ctr+j
 :inoremap <C-j> <Esc>/[)}"'\]>]<CR>:nohl<CR>a
 
