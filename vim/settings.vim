@@ -48,3 +48,6 @@ set softtabstop=2
 
 "paste hotkey
 set pastetoggle=<F2>
+
+"line limit
+set colorcolumn=80
