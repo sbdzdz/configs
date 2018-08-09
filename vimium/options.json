@@ -1,0 +1,50 @@
+{
+  "settingsVersion": "1.63.3",
+  "exclusionRules": [
+    {
+      "pattern": "https?://mail.google.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://localhost:8888/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://www.ssega.com/*",
+      "passKeys": "*"
+    },
+    {
+      "pattern": "https?://www.ssega.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://www.ssega.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://customvision.ai/*",
+      "passKeys": "*"
+    },
+    {
+      "pattern": "https?://customvision.ai/*",
+      "passKeys": ""
+    }
+  ],
+  "filterLinkHints": false,
+  "waitForEnterForFilteredHints": true,
+  "hideHud": false,
+  "keyMappings": "map < moveTabLeft\nmap > moveTabRight",
+  "linkHintCharacters": "asdfghjkleon",
+  "linkHintNumbers": "0123456789",
+  "newTabUrl": "about:newtab",
+  "nextPatterns": "next,more,newer,>,›,→,»,≫,>>",
+  "previousPatterns": "prev,previous,back,older,<,‹,←,«,≪,<<",
+  "regexFindMode": false,
+  "ignoreKeyboardLayout": false,
+  "scrollStepSize": 60,
+  "smoothScroll": true,
+  "grabBackFocus": true,
+  "searchEngines": "w: http://www.wikipedia.org/w/index.php?title=Special:Search&search=%s Wikipedia\ny: http://www.youtube.com/results?search_query=%s Youtube\ng: http://www.google.com/search?q=%s Google\ngm: https://www.google.com/maps?q=%s Google maps\nm: https://www.merriam-webster.com/dictionary/%s\ns: http://scholar.google.ch/scholar?hl=en&q=%s",
+  "searchUrl": "https://www.google.com/search?q=",
+  "userDefinedLinkHintCss": "div > .vimiumHintMarker {\n/* linkhint boxes */\nbackground: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FFF785),\n  color-stop(100%,#FFC542));\nborder: 1px solid #E3BE23;\n}\n\ndiv > .vimiumHintMarker span {\n/* linkhint text */\ncolor: black;\nfont-weight: bold;\nfont-size: 12px;\n}\n\ndiv > .vimiumHintMarker > .matchingCharacter {\n}"
+}
