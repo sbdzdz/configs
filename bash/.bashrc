@@ -12,7 +12,7 @@ then
 fi
 export PATH
 
-export WANDB_API_KEY="1c518536c17254d46809357ff6afcb162b21ae43"
+export WANDB_API_KEY=""
 export SINGULARITY_CACHEDIR=$WORK/.singularity/cache
 export SINGULARITY_TMPDIR=$WORK/.singularity/tmp
 
