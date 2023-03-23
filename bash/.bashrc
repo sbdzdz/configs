@@ -29,15 +29,19 @@ alias tomaeva='cd $HOME/visual-prompting'
 alias codis='source $WORK/virtualenvs/codis/bin/activate'
 alias maeva='source $WORK/virtualenvs/maeva/bin/activate'
 
-alias codis_out='cat $(ls -rt $WORK/projects/codis/slurm/*.out | tail -n1)'
-alias codis_err='cat $(ls -rt $WORK/projects/codis/slurm/*.err | tail -n1)'
+alias codis_out='code $(ls -rt $WORK/projects/codis/slurm/*.out | tail -n1)'
+alias codis_err='code $(ls -rt $WORK/projects/codis/slurm/*.err | tail -n1)'
+alias codis_outs='ls -rt $WORK/projects/codis/slurm/*.out'
+alias codis_errs='ls -rt $WORK/projects/codis/slurm/*.err'
 
-alias maeva_out='cat $(ls -rt $WORK/projects/maeva/slurm/*.out | tail -n1)'
-alias maeva_err='cat $(ls -rt $WORK/projects/maeva/slurm/*.err | tail -n1)'
+alias maeva_out='code $(ls -rt $WORK/projects/maeva/slurm/*.out | tail -n1)'
+alias maeva_err='code $(ls -rt $WORK/projects/maeva/slurm/*.err | tail -n1)'
+alias maeva_outs='ls -lrt $WORK/projects/maeva/slurm/*.out'
+alias maeva_errs='ls -lrt $WORK/projects/maeva/slurm/*.err'
 
 alias myshare='sshare --all | grep dziadzio'
 alias homespace='du -ahd1 $HOME | sort -rh'
-alias myjobs='squeue -u whoami -o "%.16i %.9P %.26j %.8T %.10M %.8l %.6D %.20S %R"'
+alias myjobs='squeue -u dziadzio08 -o "%.16i %.25P %.26j %.8T %.10M %.8l %.6D %.20S %R"'
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
