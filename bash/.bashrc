@@ -1,8 +1,14 @@
 # .bashrc
+export WANDB__SERVICE_WAIT=300
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
-	. /etc/bashrc
+       . /etc/bashrc
+fi
+
+# Source secrets
+if [ -f ~/.bashrc_secrets ]; then
+    source ~/.bashrc_secrets
 fi
 
 # User specific environment
@@ -12,36 +18,72 @@ then
 fi
 export PATH
 
-export WANDB_API_KEY=""
-export SINGULARITY_CACHEDIR=$WORK/.singularity/cache
-export SINGULARITY_TMPDIR=$WORK/.singularity/tmp
+to () {
+  cd $HOME/repos/$1
+  conda activate $HOME/conda_envs/$1
+}
 
-export APPTAINER_CACHEDIR=$WORK/.singularity/cache
-export APPTAINER_TMPDIR=$WORK/.singularity/tmp
+out () {
+    cat $(find $HOME/slurm/$1 -type f -name "*.out" | sort -t_ -k2,2n | tail -n 1)
+}
 
-# Uncomment the following line if you don't like systemctl's auto-paging feature:
-# export SYSTEMD_PAGER=
+err () {
+    cat $(find $HOME/slurm/$1 -type f -name "*.err" | sort -t_ -k2,2n | tail -n 1)
+}
 
-# User specific aliases and functions
-alias tocodis='cd $HOME/codis'
-alias tomaeva='cd $HOME/visual-prompting'
+outs () {
+    find $HOME/slurm/$1 -type f -name "*.out" | sort -t_ -k2,2n | tail -n 10
+}
 
-alias codis='source $WORK/virtualenvs/codis/bin/activate'
-alias maeva='source $WORK/virtualenvs/maeva/bin/activate'
+errs () {
+    find $HOME/slurm/$1 -type f -name "*.err" | sort -t_ -k2,2n | tail -n 10
+}
 
-alias codis_out='code $(ls -rt $WORK/projects/codis/slurm/*.out | tail -n1)'
-alias codis_err='code $(ls -rt $WORK/projects/codis/slurm/*.err | tail -n1)'
-alias codis_outs='ls -rt $WORK/projects/codis/slurm/*.out'
-alias codis_errs='ls -rt $WORK/projects/codis/slurm/*.err'
+quiet() {
+  "$@" > /dev/null 2>&1 &
+}
 
-alias maeva_out='code $(ls -rt $WORK/projects/maeva/slurm/*.out | tail -n1)'
-alias maeva_err='code $(ls -rt $WORK/projects/maeva/slurm/*.err | tail -n1)'
-alias maeva_outs='ls -lrt $WORK/projects/maeva/slurm/*.out'
-alias maeva_errs='ls -lrt $WORK/projects/maeva/slurm/*.err'
+quiet_out() {
+  "$@" > out.txt 2>&1 &
+}
 
+create () {
+    mkdir -p $HOME/slurm/$1
+    mkdir -p $HOME/wandb/$1
+    mkdir -p $HOME/hydra/$1
+    conda create -n $1 python=3.11
+}
+
+diskspace () {
+    du -ahd1 $1 | sort -rh
+}
+
+freeup () {
+    if [ $# -ne 1 ]; then
+        echo "Must provide a single directory path. Usage: freeup <directory_path>"
+        return 1
+    fi
+
+    read -p "This will truncate and delete $1. Are you sure you want to continue? (y/n): " user_input
+
+    if [ "$user_input" = "y" ] || [ "$user_input" = "Y" ]; then
+        find $1 -type f ! -size 0c | parallel -X --progress truncate -s0 && rm -r $1
+    fi
+}
+
+run () {
+    nohup "$@" > /dev/null 2>&1 &
+}
+
+alias interactive-preemptable='srun --gres=gpu:1 -p h100-preemptable-galvani --job-name "interactive" --ntasks=1 --nodes=1 --time 12:00:00 --pty bash'
+alias interactive='srun --gres=gpu:1 -p h100-galvani --job-name "interactive" --ntasks=1 --nodes=1 --mem=50G --time 12:00:00 --pty bash'
+alias vscode='sbatch $HOME/vscode/allocate-galvani-vs.sh'
+alias vscode-cpu='sbatch $HOME/vscode/allocate-galvani-vs-cpu.sh'
+alias vscode-large='sbatch $HOME/vscode/allocate-galvani-vs-large.sh'
 alias myshare='sshare --all | grep dziadzio'
-alias homespace='du -ahd1 $HOME | sort -rh'
-alias myjobs='squeue -u dziadzio08 -o "%.16i %.25P %.26j %.8T %.10M %.8l %.6D %.20S %R"'
+alias myjobs='squeue -u dziadzio08 -o "%.16i %.25P %.70j %.8T %.10M %.8l %.6D %.20S %R"'
+alias cancelall='scancel -u $USER'
+alias numjobs='squeue -u dziadzio08 -o "%.16i %.25P %.26j %.8T %.10M %.8l %.6D %.20S %R" | tail -n+2 | wc -l'
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -57,4 +99,3 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
