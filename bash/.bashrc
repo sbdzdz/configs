@@ -1,7 +1,6 @@
 # .bashrc
 export WANDB__SERVICE_WAIT=300
 
-# Source global definitions
 if [ -f /etc/bashrc ]; then
        . /etc/bashrc
 fi
@@ -11,7 +10,6 @@ if [ -f ~/.bashrc_secrets ]; then
     source ~/.bashrc_secrets
 fi
 
-# User specific environment
 if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
 then
     PATH="$HOME/.local/bin:$HOME/bin:$PATH"
@@ -24,19 +22,19 @@ to () {
 }
 
 out () {
-    cat $(find $HOME/slurm/$1 -type f -name "*.out" | sort -t_ -k2,2n | tail -n 1)
+    cat $(find $HOME/$1/outputs/slurm -type f -name "*.out" | sort -t_ -k2,2n | tail -n 1)
 }
 
 err () {
-    cat $(find $HOME/slurm/$1 -type f -name "*.err" | sort -t_ -k2,2n | tail -n 1)
+    cat $(find $HOME/$1/outputs/slurm -type f -name "*.err" | sort -t_ -k2,2n | tail -n 1)
 }
 
 outs () {
-    find $HOME/slurm/$1 -type f -name "*.out" | sort -t_ -k2,2n | tail -n 10
+    find $HOME/$1/outputs/slurm -type f -name "*.out" | sort -t_ -k2,2n | tail -n 10
 }
 
 errs () {
-    find $HOME/slurm/$1 -type f -name "*.err" | sort -t_ -k2,2n | tail -n 10
+    find $HOME/$1/outputs/slurm -type f -name "*.err" | sort -t_ -k2,2n | tail -n 10
 }
 
 quiet() {
@@ -45,13 +43,6 @@ quiet() {
 
 quiet_out() {
   "$@" > out.txt 2>&1 &
-}
-
-create () {
-    mkdir -p $HOME/slurm/$1
-    mkdir -p $HOME/wandb/$1
-    mkdir -p $HOME/hydra/$1
-    conda create -n $1 python=3.11
 }
 
 diskspace () {
@@ -99,3 +90,9 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/weka/bethge/dziadzio08/google-cloud-sdk/path.bash.inc' ]; then . '/weka/bethge/dziadzio08/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/weka/bethge/dziadzio08/google-cloud-sdk/completion.bash.inc' ]; then . '/weka/bethge/dziadzio08/google-cloud-sdk/completion.bash.inc'; fi
