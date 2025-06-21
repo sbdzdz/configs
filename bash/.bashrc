@@ -17,8 +17,8 @@ fi
 export PATH
 
 to () {
-  cd $HOME/repos/$1
-  conda activate $HOME/conda_envs/$1
+  cd $HOME/$1
+  source .venv/bin/activate
 }
 
 out () {
@@ -68,9 +68,9 @@ run () {
 
 alias interactive-preemptable='srun --gres=gpu:1 -p h100-preemptable-galvani --job-name "interactive" --ntasks=1 --nodes=1 --time 12:00:00 --pty bash'
 alias interactive='srun --gres=gpu:1 -p h100-galvani --job-name "interactive" --ntasks=1 --nodes=1 --mem=50G --time 12:00:00 --pty bash'
-alias vscode='sbatch $HOME/vscode/allocate-galvani-vs.sh'
-alias vscode-cpu='sbatch $HOME/vscode/allocate-galvani-vs-cpu.sh'
-alias vscode-large='sbatch $HOME/vscode/allocate-galvani-vs-large.sh'
+alias vscode='sbatch $HOME/vscode/allocate-vs.sh'
+alias vscode-cpu='sbatch $HOME/vscode/allocate-vs-cpu.sh'
+alias vscode-large='sbatch $HOME/vscode/allocate-vs-large.sh'
 alias myshare='sshare --all | grep dziadzio'
 alias myjobs='squeue -u dziadzio08 -o "%.16i %.25P %.70j %.8T %.10M %.8l %.6D %.20S %R"'
 alias cancelall='scancel -u $USER'
