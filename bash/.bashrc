@@ -70,7 +70,8 @@ alias interactive-preemptable='srun --gres=gpu:1 -p h100-preemptable-galvani --j
 alias interactive='srun --gres=gpu:1 -p h100-galvani --job-name "interactive" --ntasks=1 --nodes=1 --mem=50G --time 12:00:00 --pty bash'
 alias kill-cursor="ps -u "$USER" -o pid=,command= | grep -i cursor | awk '{print $1}' | xargs -r kill"
 alias vscode='sbatch $HOME/vscode/allocate-vs.sh'
-alias vscode-large='sbatch --mem=100G $HOME/vscode/allocate-vs.sh'
+alias vscode-large='sbatch --mem=300G $HOME/vscode/allocate-vs.sh'
+alias vscode-short='sbatch --time=6:00:00 $HOME/vscode/allocate-vs.sh'
 alias myshare='sshare --all | grep dziadzio'
 alias myjobs='squeue -u dziadzio08 -o "%.10i %.20P %.10j %.10T %.10M %.15l %.10D %.25S %.15R"'
 alias cancelall='scancel -u $USER'
