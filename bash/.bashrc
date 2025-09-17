@@ -97,3 +97,65 @@ if [ -f '/weka/bethge/dziadzio08/google-cloud-sdk/path.bash.inc' ]; then . '/wek
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/weka/bethge/dziadzio08/google-cloud-sdk/completion.bash.inc' ]; then . '/weka/bethge/dziadzio08/google-cloud-sdk/completion.bash.inc'; fi
+
+# Find and cat the Nth newest file in a directory
+latest() {
+    local n=1
+    local dir
+
+    # Parse -n option
+    while [[ $# -gt 0 ]]; do
+        case $1 in
+            -n)
+                n="$2"
+                shift 2
+                ;;
+            -*)
+                echo "Usage: latest [-n N] <directory>" >&2
+                return 1
+                ;;
+            *)
+                dir="$1"
+                shift
+                ;;
+        esac
+    done
+
+    if [[ -z "$dir" ]]; then
+        echo "Usage: latest [-n N] <directory>" >&2
+        return 1
+    fi
+
+    if [[ ! -d "$dir" ]]; then
+        echo "Error: $dir is not a directory" >&2
+        return 1
+    fi
+
+    find "$dir" -type f -name '*.err' -printf '%T@ %p\n' | sort -nr | sed -n "${n}p" | cut -d' ' -f2- | xargs -r cat
+}
+
+# Show SLURM job stats: totals and top-10 users for pending/running
+alljobs() {
+    local pd_total r_total
+    pd_total=$(squeue -t PD -h | wc -l)
+    r_total=$(squeue -t R  -h | wc -l)
+
+    echo "PENDING (total: ${pd_total})"
+    squeue -t PD -h -o "%u" \
+      | sort \
+      | uniq -c \
+      | sort -nr \
+      | head -10 \
+      | awk 'BEGIN{printf "%-20s %6s\n","USER","PD"} {printf "%-20s %6d\n",$2,$1}' \
+      | column -t
+    echo
+
+    echo "RUNNING (total: ${r_total})"
+    squeue -t R -h -o "%u" \
+      | sort \
+      | uniq -c \
+      | sort -nr \
+      | head -10 \
+      | awk 'BEGIN{printf "%-20s %6s\n","USER","R"} {printf "%-20s %6d\n",$2,$1}' \
+      | column -t
+}
